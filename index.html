@@ -5,103 +5,8 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<style>
-		html, body {
-			background-color: #2b2b2b;
-			color: whitesmoke;
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-			width: 100%;
-			height: 100%;
-		}
-		h1 {
-			width: 100%;
-			text-align: center;
-		}
-		h2 {
-			margin-left: 2.5vw;
-		}
-		h3 {
-			margin-left: 5vw;
-		}
-		.help-container {
-			width: 90%;
-			margin-left: 5vw;
-			background-color: #444444;
-			box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
-		}
-		.table {
-			display: flex;
-			flex-direction: column;
-			place-content: space-evenly;
-			width: 90vw;
-			margin-left: 5vw;
-			box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
-		}
-		.table-header, .table-content {
-			display: flex;
-			flex-direction: row;
-			place-content: space-evenly;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			text-align: center;
-			min-height: 30px;
-		}
-		.table-header {
-			font-weight: bold;
-			background-color: #333333;
-		}
-		.table-content {
-			background-color: #444444;
-		}
-		.cell {
-			width: calc(90% / 9);
-			height: 50px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-			border-top: 1px solid #333333;
-		}
-		.range-bar {
-			width: 100%;
-		}
-		#tickmarks {
-			display: flex;
-			width: calc(90vw / 9);
-		}
-		.range-option {
-			text-align: center;
-			width: 10%;
-		}
-		.empty {
-		}
-	</style>
-	<script>
-		$('input[type=range]').on('input', function() {
-			$(this).trigger('change');
-		});
-		$(this).on('change', function($event) {
-			var target = $event.target.id.replace('-range', '-extra');
-			var value = $event.target.value;
-			var result = '';
-			console.log(value);
-			if (value == 1) {
-				result = '-1 sur les jets, pas de contre attaque.';
-			}
-			if (value == 2) {
-				result = '-1 sur les jets.';
-			}
-			if (value == 8 || value == 9) {
-				result = '+1 sur les jets.';
-			}
-			if (value == 10) {
-				result = '+1 sur les jets, contre attaque sur 5-6.';
-			}
-			console.log(result);
-			document.getElementById(target).innerHTML = result;
-		})
-	</script>
+	<link href="./global.css" rel="stylesheet">
+	<script src="./global.js"></script>
 </head>
 <body>
 	<h1>Fichasses Dartouasse</h1>
@@ -1190,11 +1095,11 @@
 			<div class="table-content">
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
-				<div class="cell">3</div>
+				<div class="cell">4</div>
 				<div class="cell">2</div>
 				<div class="cell">5</div>
 				<div class="cell">4</div>
-				<div class="cell">3</div>
+				<div class="cell">2</div>
 				<div class="cell">5</div>
 				<div class="cell">
 					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="kaz-range"/>
@@ -1214,6 +1119,17 @@
 			</div>
 			<div class="table-content">
 				<div class="cell">Fusil</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Dague à corde</div>
 				<div class="cell">Perforant</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell">+1</div>
@@ -1454,17 +1370,16 @@
 			<div class="table-content">
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
-				<div class="cell">4</div>
 				<div class="cell">2</div>
-				<div class="cell">6</div>
+				<div class="cell">3</div>
 				<div class="cell">4</div>
-				<div class="cell">2</div>
+				<div class="cell">5</div>
 				<div class="cell">4</div>
+				<div class="cell">5</div>
 				<div class="cell">
-					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="nuo-range"/>
+					<input type="range" min="1" max="10" value="6" list="tickmarks" class="range-bar" id="nuo-range"/>
 					<datalist id="tickmarks">
 						<option class="range-option" value="1" label="1"></option>
-						
 						<option class="range-option" value="2"></option>
 						<option class="range-option" value="3"></option>
 						<option class="range-option" value="4"></option>
@@ -1478,10 +1393,10 @@
 				</div>
 			</div>
 			<div class="table-content">
-				<div class="cell">Révolver</div>
-				<div class="cell">Perforant</div>
+				<div class="cell">Katana</div>
+				<div class="cell">Tranchant</div>
 				<div class="cell empty">&nbsp;</div>
-				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
@@ -1489,9 +1404,9 @@
 				<div class="cell empty">&nbsp;</div>
 			</div>
 			<div class="table-content">
-				<div class="cell">Couteau</div>
-				<div class="cell">Tranchant</div>
-				<div class="cell">+1</div>
+				<div class="cell">Arc</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
@@ -1511,13 +1426,13 @@
 				<div class="cell empty">&nbsp;</div>
 			</div>
 			<div class="table-content">
-				<div class="cell">Armure de cuir</div>
-				<div class="cell">Armure</div>
+				<div class="cell">Kimono</div>
+				<div class="cell">Vêtement</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
-				<div class="cell">+1</div>
-				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 				<div class="cell empty">&nbsp;</div>
 			</div>
