@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<style>
+		html, body {
+			background-color: #2b2b2b;
+			color: whitesmoke;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			width: 100%;
+			height: 100%;
+		}
+		h1 {
+			width: 100%;
+			text-align: center;
+		}
+		h2 {
+			margin-left: 2.5vw;
+		}
+		h3 {
+			margin-left: 5vw;
+		}
+		.help-container {
+			width: 90%;
+			margin-left: 5vw;
+			background-color: #444444;
+			box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
+		}
+		.table {
+			display: flex;
+			flex-direction: column;
+			place-content: space-evenly;
+			width: 90vw;
+			margin-left: 5vw;
+			box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
+		}
+		.table-header, .table-content {
+			display: flex;
+			flex-direction: row;
+			place-content: space-evenly;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			text-align: center;
+			min-height: 30px;
+		}
+		.table-header {
+			font-weight: bold;
+			background-color: #333333;
+		}
+		.table-content {
+			background-color: #444444;
+		}
+		.cell {
+			width: calc(90% / 9);
+			height: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			border-top: 1px solid #333333;
+		}
+		.range-bar {
+			width: 100%;
+		}
+		#tickmarks {
+			display: flex;
+			width: calc(90vw / 9);
+		}
+		.range-option {
+			text-align: center;
+			width: 10%;
+		}
+		.empty {
+		}
+	</style>
+	<script>
+		$('input[type=range]').on('input', function() {
+			$(this).trigger('change');
+		});
+		$(this).on('change', function($event) {
+			var target = $event.target.id.replace('-range', '-extra');
+			var value = $event.target.value;
+			var result = '';
+			console.log(value);
+			if (value == 1) {
+				result = '-1 sur les jets, pas de contre attaque.';
+			}
+			if (value == 2) {
+				result = '-1 sur les jets.';
+			}
+			if (value == 8 || value == 9) {
+				result = '+1 sur les jets.';
+			}
+			if (value == 10) {
+				result = '+1 sur les jets, contre attaque sur 5-6.';
+			}
+			console.log(result);
+			document.getElementById(target).innerHTML = result;
+		})
+	</script>
+</head>
+<body>
+	<h1>Fichasses Dartouasse</h1>
+
+	<h2>Sulh</h2>
+	<h3>
+		<a data-toggle="collapse" href="#howell" role="button" aria-expanded="false" aria-controls="howell">Howell</a>
+		<div id="howell-extra"></div>
+	</h3>
+	<div class="collapse" id="howell">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">5</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">5</div>
+				<div class="cell">2</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="howell-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Kazu</h2>
+	<h3>
+		<a data-toggle="collapse" href="#thorund" role="button" aria-expanded="false" aria-controls="thorund">Thorund</a>
+		<div id="thorund-extra"></div>
+	</h3>
+	<div class="collapse" id="thorund">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">5</div>
+				<div class="cell">5</div>
+				<div class="cell">2</div>
+				<div class="cell">5</div>
+				<div class="cell">3</div>
+				<div class="cell">3</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="6" list="tickmarks" class="range-bar" id="thorund-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Bâton en corail</div>
+				<div class="cell">Arme magique</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">Arme magique</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Poignard</div>
+				<div class="cell empty">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#steaming" role="button" aria-expanded="false" aria-controls="steaming">Steaming</a>
+		<div id="steaming-extra"></div>
+	</h3>
+	<div class="collapse" id="steaming">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">2</div>
+				<div class="cell">3</div>
+				<div class="cell">6</div>
+				<div class="cell">3</div>
+				<div class="cell">1</div>
+				<div class="cell">6</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="4" list="tickmarks" class="range-bar" id="steaming-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Epée</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Pistolame</div>
+				<div class="cell empty">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Pistolame</div>
+				<div class="cell empty">Tranchant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure légère</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure Intermédiaire</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure lourde</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+3</div>
+				<div class="cell">-3</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#kazu" role="button" aria-expanded="false" aria-controls="kazu">Kazu</a>
+		<div id="kazu-extra"></div>
+	</h3>
+	<div class="collapse" id="kazu">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">6</div>
+				<div class="cell">6</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">3</div>
+				<div class="cell">1</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="7" list="tickmarks" class="range-bar" id="kazu-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Livre arcanique</div>
+				<div class="cell">Arme magique</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Tatouages arcaniques</div>
+				<div class="cell empty">Arme magique</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#voynomir" role="button" aria-expanded="false" aria-controls="voynomir">Voynomir</a>
+		<div id="voynomir-extra"></div>
+	</h3>
+	<div class="collapse" id="voynomir">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">4</div>
+				<div class="cell">3</div>
+				<div class="cell">4</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="voynomir-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Marteau</div>
+				<div class="cell">Contondant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Main nues</div>
+				<div class="cell">Contondant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure légère</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure interm</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure lourde</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+3</div>
+				<div class="cell">-3</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Arty</h2>
+	<h3>
+		<a data-toggle="collapse" href="#artellus" role="button" aria-expanded="false" aria-controls="artellus">Artellus</a>
+		<div id="artellus-extra"></div>
+	</h3>
+	<div class="collapse" id="artellus">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">2</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">4</div>
+				<div class="cell">4</div>
+				<div class="cell">6</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="7" list="tickmarks" class="range-bar" id="artellus-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Fusil garlemaldais</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Pistolame</div>
+				<div class="cell">Perforant (tir) Tranchant (CaC)</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Canon à impulsion miniaturisé</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Matraque électrifiée</div>
+				<div class="cell">Foudre</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Grenades</div>
+				<div class="cell">Feu</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Tenue de combat</div>
+				<div class="cell">Armure Intermédiaire</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Bouclier magitek</div>
+				<div class="cell">Armure Intermédiaire</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#keo" role="button" aria-expanded="false" aria-controls="keo">Keo</a>
+		<div id="keo-extra"></div>
+	</h3>
+	<div class="collapse" id="keo">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">3</div>
+				<div class="cell">3</div>
+				<div class="cell">5</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="keo-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Pistolet</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#khan" role="button" aria-expanded="false" aria-controls="khan">Khan</a>
+		<div id="khan-extra"></div>
+	</h3>
+	<div class="collapse" id="khan">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">5</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="7" list="tickmarks" class="range-bar" id="khan-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Epée</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#osha" role="button" aria-expanded="false" aria-controls="osha">Osha'to</a>
+		<div id="osha-extra"></div>
+	</h3>
+	<div class="collapse" id="osha">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">3</div>
+				<div class="cell">3</div>
+				<div class="cell">4</div>
+				<div class="cell">4</div>
+				<div class="cell">5</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="7" list="tickmarks" class="range-bar" id="osha-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Pistolet</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Uniforme des Immortels</div>
+				<div class="cell">Armure intermédiaire</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+2</div>
+				<div class="cell">-2</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#suzume" role="button" aria-expanded="false" aria-controls="suzume">Suzume</a>
+		<div id="suzume-extra"></div>
+	</h3>
+	<div class="collapse" id="suzume">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">2</div>
+				<div class="cell">3</div>
+				<div class="cell">5</div>
+				<div class="cell">5</div>
+				<div class="cell">1</div>
+				<div class="cell">6</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="suzume-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Katana</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Dague</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Tunique renforcée</div>
+				<div class="cell">Armure légère</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#ollie" role="button" aria-expanded="false" aria-controls="ollie">Ollie</a>
+		<div id="ollie-extra"></div>
+	</h3>
+	<div class="collapse" id="ollie">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">4</div>
+				<div class="cell">3</div>
+				<div class="cell">5</div>
+				<div class="cell">5</div>
+				<div class="cell">3</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="6" list="tickmarks" class="range-bar" id="ollie-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Grimoire</div>
+				<div class="cell">Arme magique/neutre</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<h3>
+		<a data-toggle="collapse" href="#mana" role="button" aria-expanded="false" aria-controls="mana">Mana</a>
+		<div id="mana-extra"></div>
+	</h3>
+	<div class="collapse" id="mana">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">5</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="mana-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Bâton de prêtresse</div>
+				<div class="cell">Arme magique/lumière</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Nox</h2>
+	<h3>
+		<a data-toggle="collapse" href="#ozymandias" role="button" aria-expanded="false" aria-controls="ozymandias">Ozymandias</a>
+		<div id="ozymandias-extra"></div>
+	</h3>
+	<div class="collapse" id="ozymandias">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">3</div>
+				<div class="cell">2</div>
+				<div class="cell">5</div>
+				<div class="cell">4</div>
+				<div class="cell">3</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="ozymandias-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Bébé</div>
+				<div class="cell">Fusil - lunette amovible - perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell">Objets d'environnement</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Malone</h2>
+	<h3>
+		<a data-toggle="collapse" href="#kaz" role="button" aria-expanded="false" aria-controls="kaz">Kaz</a>
+		<div id="kaz-extra"></div>
+	</h3>
+	<div class="collapse" id="kaz">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">3</div>
+				<div class="cell">2</div>
+				<div class="cell">5</div>
+				<div class="cell">4</div>
+				<div class="cell">3</div>
+				<div class="cell">5</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="kaz-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Fusil</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Dank</h2>
+	<h3>
+		<a data-toggle="collapse" href="#rouge" role="button" aria-expanded="false" aria-controls="rouge">Rouge</a>
+		<div id="rouge-extra"></div>
+	</h3>
+	<div class="collapse" id="rouge">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="rouge-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Révolver</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Couteau</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Kira</h2>
+	<h3>
+		<a data-toggle="collapse" href="#kira" role="button" aria-expanded="false" aria-controls="kira">Kira</a>
+		<div id="kira-extra"></div>
+	</h3>
+	<div class="collapse" id="kira">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="kira-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Révolver</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Couteau</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2>Nuo</h2>
+	<h3>
+		<a data-toggle="collapse" href="#nuo" role="button" aria-expanded="false" aria-controls="nuo">Nuo</a>
+		<div id="nuo-extra"></div>
+	</h3>
+	<div class="collapse" id="nuo">
+		<div class="table">
+			<div class="table-header">
+				<div class="cell">Objet</div>
+				<div class="cell">Type</div>
+				<div class="cell">Toucher CaC</div>
+				<div class="cell">Toucher Distance</div>
+				<div class="cell">Toucher Magique</div>
+				<div class="cell">Sauvegarde Physique</div>
+				<div class="cell">Sauvegarde Esquive</div>
+				<div class="cell">Sauvegarde Magique</div>
+				<div class="cell">Moral</div>
+			</div>
+			<div class="table-content">
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">6</div>
+				<div class="cell">4</div>
+				<div class="cell">2</div>
+				<div class="cell">4</div>
+				<div class="cell">
+					<input type="range" min="1" max="10" value="5" list="tickmarks" class="range-bar" id="nuo-range"/>
+					<datalist id="tickmarks">
+						<option class="range-option" value="1" label="1"></option>
+						
+						<option class="range-option" value="2"></option>
+						<option class="range-option" value="3"></option>
+						<option class="range-option" value="4"></option>
+						<option class="range-option" value="5" label="5"></option>
+						<option class="range-option" value="6"></option>
+						<option class="range-option" value="7"></option>
+						<option class="range-option" value="8"></option>
+						<option class="range-option" value="9"></option>
+						<option class="range-option" value="10" label="10"></option>
+					</datalist>
+				</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Révolver</div>
+				<div class="cell">Perforant</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Couteau</div>
+				<div class="cell">Tranchant</div>
+				<div class="cell">+1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Mains nues</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+			<div class="table-content">
+				<div class="cell">Armure de cuir</div>
+				<div class="cell">Armure</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell">+1</div>
+				<div class="cell">-1</div>
+				<div class="cell empty">&nbsp;</div>
+				<div class="cell empty">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<h2><a data-toggle="collapse" href="#help" role="button" aria-expanded="false" aria-controls="help">Aide</a></h2>
+	<div class="collapse" id="help">
+		<div class="help-container">
+			<ul>
+				<li>Arme contondante : si critique pas de défense adverse</li>
+				<li>Arme perforante : -1 au jet de sauvegarde pour la défense</li>
+				<li>Arme tranchante : DoT si critique</li>
+			</ul>
+			<ul>
+				<li>Feu : DoT si critique</li>
+				<li>Terre: si critique pas de défense adverse</li>
+				<li>Foudre : si critique la cible ne peut pas se déplacer au prochain tour</li>
+				<li>Eau : si critique la cible est repoussée</li>
+				<li>Vent : si critique désarme la cible</li>
+				<li>Glace : -1 au jet de sauvegarde pour la défense</li>
+				<li>Neutre : si coup critique, un effet magique aléatoire (D8)</li>
+				<li>Lumière : -1 au jet de toucher adverse au prochain tour</li>
+				<li>Ténèbre : si coup critique -1 au moral de la cible</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
